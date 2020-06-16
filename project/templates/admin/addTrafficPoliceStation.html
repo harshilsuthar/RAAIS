@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!-- line 50 for header map-->
+<!--line 74 for table settings-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Add TrafficPoliceStation</title>
+
+    <!-- Bootstrap 4.1-->
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap.min.css">
+
+    <!-- Bootstrap extend-->
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap-extend.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../static/adminResources/css/master_style.css">
+
+    <!-- SoftMaterial admin skins -->
+    <link rel="stylesheet" href="../../static/adminResources/css/_all-skins.css">
+
+</head>
+<body class="hold-transition skin-purple-light sidebar-mini">
+<div class="wrapper">
+
+
+    {% include 'admin/header.html' %}
+    {% include 'admin/menu.html' %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Add TrafficPoliceStation
+            </h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">TrafficPoliceStation</a></li>
+                <li class="breadcrumb-item active">Add TrafficPoliceStation</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Basic Forms -->
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col">
+                            <form action="/admin/insertTrafficPoliceStation" method="post">
+                                <div class="row">
+                                    <div class="col-lg-4 col-12">
+                                        <div class="form-group">
+                                            <h5>TPS Username<span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <input type="text" name="trafficPoliceStationUsername"
+                                                       class="form-control">
+                                                <div class="help-block"></div>
+                                            </div>
+                                            <div class="form-control-feedback">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h5>TrafficPoliceStation Name<span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <input type="text" name="trafficPoliceStationName" class="form-control">
+                                                <div class="help-block"></div>
+                                            </div>
+                                            <div class="form-control-feedback">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h5>TPS Area<span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <select name="trafficPoliceStation_AreaId" id="select" required
+                                                        class="form-control">
+                                                    {% for i in  areaVOList %}
+                                                        <option value="{{ i['areaId'] }}">{{ i['areaName'] }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-control-feedback">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h5>TPS Address<span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <textarea name="trafficPoliceStationAddress" class="form-control"></textarea>
+                                                <div class="help-block"></div>
+                                            </div>
+                                            <div class="form-control-feedback">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <h5>TPS Contact<span class="text-danger">*</span></h5>
+                                            <div class="controls">
+                                                <input type="text" name="trafficPoliceStationContact"
+                                                       class="form-control">
+                                                <div class="help-block"></div>
+                                            </div>
+                                            <div class="form-control-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-xs-right bt-1 pt-10">
+                                    <input type="submit" class="btn btn-info" value="Submit">
+                                </div>
+                            </form>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    {% include 'admin/footer.html' %}
+
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../../static/adminResources/js/jquery-3.3.1.js"></script>
+
+<!-- popper -->
+<script src="../../static/adminResources/js/popper.min.js"></script>
+
+<!-- Bootstrap 4.1-->
+<script src="../../static/adminResources/js/bootstrap.min.js"></script>
+
+<!-- SlimScroll -->
+<script src="../../static/adminResources/js/jquery.slimscroll.min.js"></script>
+
+<!-- FastClick -->
+<script src="../../static/adminResources/js/fastclick.js"></script>
+
+<!-- SoftMaterial admin App -->
+<script src="../../static/adminResources/js/template.js"></script>
+
+<!-- SoftMaterial admin for demo purposes -->
+<script src="../../static/adminResources/js/demo.js"></script>
+
+<!-- Form validator JavaScript -->
+<script src="../../static/adminResources/js/validation.js"></script>
+<script src="../../static/adminResources/js/form-validation.js"></script>
+
+</body>
+</html>

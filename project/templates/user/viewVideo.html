@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- line 60 for header map-->
+<!--line 78 for table settings-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>View Video</title>
+
+    <!-- Bootstrap 4.1-->
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap.min.css">
+
+    <!-- Data Table-->
+    <link rel="stylesheet" type="text/css" href="../../static/adminResources/css/datatables.min.css"/>
+
+    <!-- Bootstrap extend-->
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap-extend.css">
+
+    <!-- Bootstrap switch-->
+    <link rel="stylesheet" href="../../static/adminResources/css/switch.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../static/adminResources/css/master_style.css">
+
+    <!-- SoftMaterial admin skins -->
+    <link rel="stylesheet" href="../../static/adminResources/css/_all-skins.css">
+
+</head>
+
+<body class="hold-transition skin-purple-light sidebar-mini">
+<div class="wrapper">
+
+
+    {% include 'user/header.html' %}
+
+    {% include 'user/menu.html' %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                View Video
+            </h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Video</a></li>
+                <li class="breadcrumb-item active">View Video</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <!-- /.box -->
+
+                    <div class="box">
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table id="example"
+                                       class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+                                    <thead>
+                                    <tr>
+                                        <th>Crossroad Name</th>
+                                        <th>Camera Code</th>
+                                        <th>Input File Name</th>
+                                        <th>Output File Name</th>
+                                        <th>View Input Video</th>
+                                        <th>View Output Video</th>
+                                        <th>Illegal Cars</th>
+                                        <th>Legal Cars</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in videoVOList %}
+                                        <tr>
+                                            <td>{{ i[2]['crossroadName'] }}</td>
+                                            <td>{{ i[3]['cameraCode'] }}</td>
+                                            <td>{{ i[0]['inputVideoFilename'] }}</td>
+                                            <td>{{ i[0]['outputVideoFilename'] }}</td>
+                                            <td><a href="
+                                                    {{ i[0]['inputVideoFilePath'] }}{{ i[0]['inputVideoFilename'] }}"
+                                                   target="_blank"><i class="mdi mdi-eye"
+                                                                      style="font-size: 20px;margin-left: 35px;color: green"></i></a>
+                                            </td>
+                                            <td><a href="
+                                                    {{ i[0]['outputVideoFilePath'] }}{{ i[0]['outputVideoFilename'] }}"
+                                                   target="_blank"><i class="mdi mdi-eye"
+                                                                      style="font-size: 20px;margin-left: 35px;color: green"></i></a>
+                                            </td>
+                                            <td>{{ i[0]['illegalCarCount'] }}</td>
+                                            <td>{{ i[0]['legalCarCount'] }}</td>
+                                            <td><a href="/user/deleteVideo?videoId={{ i[0]['videoId'] }}">Delete</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    {% include 'user/footer.html' %}
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../../static/adminResources/js/jquery-3.3.1.js"></script>
+
+<!-- popper -->
+<script src="../../static/adminResources/js/popper.min.js"></script>
+
+<!-- Bootstrap 4.1-->
+<script src="../../static/adminResources/js/bootstrap.min.js"></script>
+
+<!-- SlimScroll -->
+<script src="../../static/adminResources/js/jquery.slimscroll.min.js"></script>
+
+<!-- FastClick -->
+<script src="../../static/adminResources/js/fastclick.js"></script>
+
+<!-- SoftMaterial admin App -->
+<script src="../../static/adminResources/js/template.js"></script>
+
+<!-- SoftMaterial admin for demo purposes -->
+<script src="../../static/adminResources/js/demo.js"></script>
+
+<!-- This is data table -->
+<script src="../../static/adminResources/js/datatables.min.js"></script>
+
+<!-- SoftMaterial admin for Data Table -->
+<script src="../../static/adminResources/js/data-table.js"></script>
+<script src="../../static/adminResources/js/project-table.js"></script>
+
+
+</body>
+</html>

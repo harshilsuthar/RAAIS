@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- line 60 for header map-->
+<!--line 78 for table settings-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>View Feedback</title>
+
+    <!-- Bootstrap 4.1-->
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap.min.css">
+
+    <!-- Data Table-->
+    <link rel="stylesheet" type="text/css" href="../../static/adminResources/css/datatables.min.css"/>
+
+    <!-- Bootstrap extend-->
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap-extend.css">
+
+    <!-- Bootstrap switch-->
+    <link rel="stylesheet" href="../../static/adminResources/css/switch.css">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../static/adminResources/css/master_style.css">
+
+    <!-- SoftMaterial admin skins -->
+    <link rel="stylesheet" href="../../static/adminResources/css/_all-skins.css">
+
+</head>
+
+<body class="hold-transition skin-purple-light sidebar-mini">
+<div class="wrapper">
+
+
+    {% include 'admin/header.html' %}
+
+
+    <!-- Left side column. contains the logo and sidebar -->
+
+
+    {% include 'admin/menu.html' %}
+
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                View Feedback
+            </h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Feedback</a></li>
+                <li class="breadcrumb-item active">View Feedback</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <!-- /.box -->
+
+                    <div class="box">
+
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table id="example"
+                                       class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+                                    <thead>
+                                    <tr>
+                                        <th>Feedback Username</th>
+                                        <th>Feedback Subject</th>
+                                        <th>Feedback Description</th>
+                                        <th>Feedback Date</th>
+                                        <th>Feedback Time</th>
+                                        <th>Feedback Rating</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in feedbackVOList %}
+                                        <tr>
+                                            <td>{{ row[1]['loginUsername'] }}</td>
+                                            <td>{{ row[0]['feedbackSubject'] }}</td>
+                                            <td>{{ row[0]['feedbackDescription'] }}</td>
+                                            <td>{{ row[0]['feedbackDate'] }}</td>
+                                            <td>{{ row[0]['feedbackTime'] }}</td>
+                                            <td>
+                                                <div class="rate">{% for i in range(row[0]['feedbackRating']) %}
+                                                    <img src="../static/adminResources/image/star.png" height="15" width="15">
+                                                {% endfor %}</div>
+                                            </td>
+                                            <td>
+                                                {% if row[0]['feedbackTo_LoginId'] == None %}<a href='/admin/reviewFeedback?feedbackId={{ row[0]['feedbackId'] }}'>Review</a>
+                                                {% else %}reviewed{% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    {% include 'admin/footer.html' %}
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../../static/adminResources/js/jquery-3.3.1.js"></script>
+
+<!-- popper -->
+<script src="../../static/adminResources/js/popper.min.js"></script>
+
+<!-- Bootstrap 4.1-->
+<script src="../../static/adminResources/js/bootstrap.min.js"></script>
+
+<!-- SlimScroll -->
+<script src="../../static/adminResources/js/jquery.slimscroll.min.js"></script>
+
+<!-- FastClick -->
+<script src="../../static/adminResources/js/fastclick.js"></script>
+
+<!-- SoftMaterial admin App -->
+<script src="../../static/adminResources/js/template.js"></script>
+
+<!-- SoftMaterial admin for demo purposes -->
+<script src="../../static/adminResources/js/demo.js"></script>
+
+<!-- This is data table -->
+<script src="../../static/adminResources/js/datatables.min.js"></script>
+
+<!-- SoftMaterial admin for Data Table -->
+<script src="../../static/adminResources/js/data-table.js"></script>
+<script src="../../static/adminResources/js/project-table.js"></script>
+
+
+</body>
+</html>

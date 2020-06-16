@@ -1,0 +1,4 @@
+add total legal car count to database cont. from /user/insertVideo
+
+change VO
+change HTML adm,user view

@@ -1,0 +1,47 @@
+<header class="main-header">
+    <a href="/admin/loadDashboard" class="logo">
+        <span class="logo-lg">
+		  <img src="../../static/adminResources/image/logo-light-text.png" alt="logo" height="30" width="158" class="light-logo">
+	  	  <img src="../../static/adminResources/image/logo-dark-text.png" alt="logo" class="dark-logo">
+	  </span>
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top">
+
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+        </a>
+
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="../../static/adminResources/image/avatar.png" class="user-image rounded-circle"
+                             alt="User Image">
+                    </a>
+                    <ul class="dropdown-menu scale-up">
+                        <li class="user-header">
+                            <img src="../../static/adminResources/image/avatar.png"
+                                 class="float-left rounded-circle" alt="User Image">
+                            <p>
+                                RAAIS
+                                <small class="mb-5">{{ session['session_LoginUsername'] }}</small>
+                            </p>
+                        </li>
+
+                        <li class="user-body">
+                            <div class="row no-gutters">
+
+                                <div role="separator" class="divider col-12"></div>
+                                <div class="col-12 text-left">
+                                    <a href="/admin/logoutSession"><i class="fa fa-power-off"></i> Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

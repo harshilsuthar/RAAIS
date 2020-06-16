@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>View Purchase</title>
+
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/adminResources/css/datatables.min.css"/>
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap-extend.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/switch.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/master_style.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/_all-skins.css">
+
+</head>
+
+<body class="hold-transition skin-purple-light sidebar-mini">
+<div class="wrapper">
+
+    {% include 'admin/header.html' %}
+    {% include 'admin/menu.html' %}
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                View Purchase
+            </h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Purchase</a></li>
+                <li class="breadcrumb-item active">View Purchase</li>
+            </ol>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table id="example"
+                                       class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+                                    <thead>
+
+                                    <tr>
+                                        <th>Package Name</th>
+                                        <th>Package Price</th>
+                                        <th>Package Duration</th>
+                                        <th>Purchase Date</th>
+                                        <th>Purchase Time</th>
+                                        <th>Purchase Username</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in purchaseVOList %}
+                                        <tr>
+                                            <td>{{ row[1]['packageName'] }}</td>
+                                            <td>{{ row[1]['packagePrice'] }}</td>
+                                            <td>{{ row[1]['packageDuration'] }}</td>
+                                            <td>{{ row[0]['purchaseDate'] }}</td>
+                                            <td>{{ row[0]['purchaseTime'] }}</td>
+                                            <td>{{ row[2]['loginUsername'] }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {% include 'admin/footer.html' %}
+
+</div>
+
+<script src="../../static/adminResources/js/jquery-3.3.1.js"></script>
+<script src="../../static/adminResources/js/popper.min.js"></script>
+<script src="../../static/adminResources/js/bootstrap.min.js"></script>
+<script src="../../static/adminResources/js/jquery.slimscroll.min.js"></script>
+<script src="../../static/adminResources/js/fastclick.js"></script>
+<script src="../../static/adminResources/js/template.js"></script>
+<script src="../../static/adminResources/js/demo.js"></script>
+<script src="../../static/adminResources/js/datatables.min.js"></script>
+<script src="../../static/adminResources/js/data-table.js"></script>
+<script src="../../static/adminResources/js/project-table.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>View Dateset</title>
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/adminResources/css/datatables.min.css"/>
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap-extend.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/switch.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/master_style.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/_all-skins.css">
+
+</head>
+
+<body class="hold-transition skin-purple-light sidebar-mini">
+<div class="wrapper">
+
+    {% include 'admin/header.html' %}
+    {% include 'admin/menu.html' %}
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                View Dataset
+            </h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Dataset</a></li>
+                <li class="breadcrumb-item active">View Dataset</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table id="example"
+                                       class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+                                    <thead>
+                                    <tr>
+                                        <th>Dataset File Name</th>
+                                        <th>Upload Date</th>
+                                        <th>Upload Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in datasetVOList %}
+                                        <tr>
+                                            <td>{{ row['datasetFilename'] }}</td>
+                                            <td>{{ row['uploadDate'] }}</td>
+                                            <td>{{ row['uploadTime'] }}</td>
+                                            <td>
+                                                <a href="{{ row['datasetFilePath'] }}{{ row['datasetFilename'] }}" target="_blank">
+                                                    <i class="mdi mdi-eye" style="font-size: 20px;margin-left: 15px;color: #ffa33d"></i>
+                                                </a>
+
+                                                <a href="/admin/deleteDataset?datasetId={{ row['datasetId'] }}">
+                                                    <i class="mdi mdi-delete" style="font-size: 20px;margin-left: 15px;color: #ffa33d"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    {% include 'admin/footer.html' %}
+</div>
+
+<script src="../../static/adminResources/js/jquery-3.3.1.js"></script>
+<script src="../../static/adminResources/js/popper.min.js"></script>
+<script src="../../static/adminResources/js/bootstrap.min.js"></script>
+<script src="../../static/adminResources/js/jquery.slimscroll.min.js"></script>
+<script src="../../static/adminResources/js/fastclick.js"></script>
+<script src="../../static/adminResources/js/template.js"></script>
+<script src="../../static/adminResources/js/demo.js"></script>
+<script src="../../static/adminResources/js/datatables.min.js"></script>
+<script src="../../static/adminResources/js/data-table.js"></script>
+<script src="../../static/adminResources/js/project-table.js"></script>
+
+
+</body>
+</html>

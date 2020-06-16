@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- line 50 for header map-->
+<!--line 74 for table settings-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Post Complain</title>
+
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap-extend.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/master_style.css">
+    <link rel="stylesheet" href="../../static/adminResources/css/_all-skins.css">
+
+</head>
+<body class="hold-transition skin-purple-light sidebar-mini">
+<div class="wrapper">
+
+    {% include 'user/header.html' %}
+
+    {% include 'user/menu.html' %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Complain
+            </h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Complain</a></li>
+            </ol>
+        </section>
+
+        <section class="content">
+
+            <div class="row">
+                <div class="col">
+                    <form action="/user/insertComplain" method="post" enctype="multipart/form-data">
+                        <div class="box">
+                            <div class="box-header with-border" style="background: #7460ee">
+                            <h5 class="box-title text-white">Post Complain</h5>
+                        </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <div class="controls">
+                                        <input type="text" name="complainSubject" class="form-control"
+                                               placeholder="Enter Complain Subject"
+                                               aria-invalid="false">
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-control-complain">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="controls">
+                                                <textarea name="complainDescription" class="form-control"
+                                                          placeholder="Enter Complain Description"
+                                                          aria-invalid="false"></textarea>
+                                        <div class="help-block"></div>
+                                    </div>
+                                    <div class="form-control-complain">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h5>Attachment<span class="text-danger">*</span></h5>
+                                    <div class="controls">
+                                        <input type="file" name="complainFile" class="form-control" required>
+                                    </div>
+                                    <div class="form-control-feedback">
+                                    </div>
+                                </div>
+                                <div class="text-xs-right">
+                                    <input type="submit" class="btn btn-info" value="Submit">
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- /.col -->
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-header with-border" style="background: #7460ee">
+                            <h5 class="box-title text-white">Complains</h5>
+                        </div>
+                        <div class="box-body">
+
+                            <div class="media-list media-list-hover media-list-divided">
+                                {% for row in complainVOList %}
+                                <div class="media">
+                                    <img class="avatar avatar-lg" src="../../static/adminResources/image/avatar.png" alt="...">
+
+                                    <div class="media-body">
+                                        <p>
+                                            <strong>{{ row['complainSubject'] }}</strong>
+                                            <span class="ml-1">
+                                                <a href="{{ row['complainFilePath'] }}/{{ row['complainFilename'] }}">
+                                                    <i class="mdi mdi-file"></i>
+                                                </a>
+                                            </span>
+                                            <span class="float-right mr-4">
+                                                    <i class="mdi mdi-timer"></i>
+                                                {{ row['complainDate'] }}
+                                            </span>
+                                        </p>
+                                        <p>
+                                            {{ row['complainDescription'] }}
+                                            <a href="/user/deleteComplain?complainId={{ row['complainId'] }}">
+                                                <i class="mdi mdi-delete ml-1" style="font-size: 15px;color: #ffa33d"></i>
+                                            </a>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                {% if row['complainStatus']=='replied' %}
+                                <div class="media" style="margin-left: 100px">
+                                    <img class="avatar avatar-lg" src="../../static/adminResources/image/avatar.png" alt="...">
+
+                                    <div class="media-body">
+                                        <p>
+                                            <strong>{{ row['replysubject'] }}</strong>
+                                            <span class="ml-1">
+                                                <a href="{{ row['replyFilePath'] }}/{{ row['replyFilename'] }}">
+                                                    <i class="mdi mdi-file"></i>
+                                                </a>
+                                            </span>
+                                            <span class="float-right mr-4">
+                                                    <i class="mdi mdi-timer"></i>
+                                                {{ row['replyDate'] }}
+                                            </span>
+                                        </p>
+                                        <p>
+                                            {{ row['replyDescription'] }}
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                    {% endif %}
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <!-- /.col -->
+                <!-- /.box-body -->
+            </div>
+
+        </section>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    {% include 'user/footer.html' %}
+
+</div>
+<!-- ./wrapper -->
+
+<script src="../../static/adminResources/js/jquery-3.3.1.js"></script>
+<script src="../../static/adminResources/js/popper.min.js"></script>
+<script src="../../static/adminResources/js/bootstrap.min.js"></script>
+<script src="../../static/adminResources/js/jquery.slimscroll.min.js"></script>
+<script src="../../static/adminResources/js/fastclick.js"></script>
+<script src="../../static/adminResources/js/template.js"></script>
+<script src="../../static/adminResources/js/demo.js"></script>
+<script src="../../static/adminResources/js/validation.js"></script>
+<script src="../../static/adminResources/js/form-validation.js"></script>
+
+</body>
+</html>

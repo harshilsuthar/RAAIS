@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<!-- line 45 for header include-->
+<!-- line 52 for menu include-->
+<!-- line 549 for footer include-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard</title>
+
+    <!-- Bootstrap 4.0-->
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap.css">
+
+    <!-- Bootstrap extend-->
+    <link rel="stylesheet" href="../../static/adminResources/css/bootstrap-extend.css">
+
+    <!-- theme style -->
+    <link rel="stylesheet" href="../../static/adminResources/css/master_style.css">
+
+    <!-- SoftMaterial admin skins -->
+    <link rel="stylesheet" href="../../static/adminResources/css/_all-skins.css">
+
+    <!-- Morris charts -->
+    <link rel="stylesheet" href="../../static/adminResources/css/morris.css">
+
+    <!-- weather weather -->
+    <link rel="stylesheet" href="../../static/adminResources/css/weather-icons.css">
+
+    <script src="../../static/adminResources/js/highcharts.js"></script>
+    <script src="../../static/adminResources/js/exporting.js"></script>
+
+    <script type="text/javascript">
+
+        function loadDates() {
+            var index_LoginId = document.getElementById("index_LoginId");
+
+            var index_VideoId = document.getElementById("index_VideoId");
+
+            index_VideoId.innerHTML = "";
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.onreadystatechange = function () {
+
+                if (ajax.readyState == 4) {
+
+                    var json = JSON.parse(ajax.responseText);
+
+                    var option1 = document.createElement("option");
+
+                    option1.value = "Select Date";
+                    option1.text = "Select Date";
+
+                    index_VideoId.options.add(option1);
+
+                    for (var i = 0; i < json.length; i++) {
+
+                        var option = document.createElement("option");
+
+                        option.value = json[i]['videoId'];
+                        option.text = json[i]['uploadDate'];
+
+                        index_VideoId.options.add(option)
+                    }
+                }
+            };
+            ajax.open("get", "/admin/ajaxLoadDateRegister?index_LoginId=" + index_LoginId.value, true);
+
+            ajax.send()
+        }
+
+        function loadGraph() {
+
+            var index_VideoId = document.getElementById("index_VideoId");
+
+            var ajax = new XMLHttpRequest();
+
+            ajax.onreadystatechange = function () {
+
+                if (ajax.readyState == 4) {
+
+                    var jsn = JSON.parse(ajax.responseText);
+
+                    if (jsn['responseKey'] != 'Error') {
+                        var xdata = [];
+                        var ydata = [];
+
+                        for (var key in jsn['responseKey']) {
+
+                            var key_value = jsn['responseKey'][key];
+
+                            xdata.push(key);
+                            ydata.push(key_value);
+
+                        }
+                        Highcharts.chart({
+                            chart: {
+                                renderTo: "container",
+
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Parking Analysis'
+                            },
+                            subtitle: {
+                                text: 'Source: RAAIS'
+                            },
+                            xAxis: {
+                                categories: xdata,
+                                crosshair: true
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: 'Count'
+                                }
+                            },
+                            plotOptions: {
+                                column: {
+                                    pointPadding: 0.2,
+                                    borderWidth: 0
+                                }
+                            },
+                            series: [{
+                                name: 'Legal - Illegal Parking',
+                                data: ydata
+
+                            }]
+                        });
+                    }
+                }
+            };
+            ajax.open("get", "/admin/ajaxGetGraphData?index_VideoId=" + index_VideoId.value, true);
+
+            ajax.send()
+        }
+    </script>
+
+</head>
+
+<body class="hold-transition skin-purple-light sidebar-mini">
+<div class="wrapper">
+    {% include 'admin/header.html' %}
+    {% include 'admin/menu.html' %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Dashboard
+            </h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-xl-3 col-md-6 col">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success rounded-circle"><i class="ion ion-thumbsup"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number">{{ feedbackCount }}</span>
+                            <span class="info-box-text">Feedbacks</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-xl-3 col-md-6 col">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-danger rounded-circle"><i class="mdi mdi-headset"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number">{{ camaraCount }}</span>
+                            <span class="info-box-text">Complains</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-xl-3 col-md-6 col">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info rounded-circle"><i class="mdi mdi-cctv"></i></span>
+
+                        <div class="info-box-content text-right">
+                            <span class="info-box-number">{{ camaraCount }}</span>
+                            <span class="info-box-text">Cameras</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-xl-3 col-md-6 col">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-success rounded-circle"><i class="fa fa-map-marker"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number">{{ areaCount }}</span>
+                            <span class="info-box-text">Areas Covered</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+
+            <div class="form-group">
+                <h5>Area Name<span class="text-danger">*</span></h5>
+                <div class="controls">
+                    <select name="index_LoginId" id="index_LoginId" onchange="loadDates()" required
+                            class="form-control">
+                        <option value="">Select Traffic Police Station</option>
+                        {% for i in trafficPoliceStationVOList %}
+                            <option value="{{ i[0]['trafficPoliceStation_LoginId'] }}">{{ i[0]['trafficPoliceStationName'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h5>Area Name<span class="text-danger">*</span></h5>
+                <div class="controls">
+                    <select name="index_VideoId" id="index_VideoId" onchange="loadGraph()" required
+                            class="form-control">
+                        <option value="">Select Date</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <input type="hidden" name="xvalue" value=""/>
+            <input type="hidden" name="yvalue" value=""/>
+
+        </section>
+    </div>
+
+
+    {% include 'admin/footer.html' %}
+</div>
+<!-- ./wrapper -->
+
+
+<!-- jQuery 3 -->
+<script src="../../static/adminResources/js/jquery-3.3.1.js"></script>
+
+<!-- popper -->
+<script src="../../static/adminResources/js/popper.min.js"></script>
+
+<!-- Bootstrap 4.0-->
+<script src="../../static/adminResources/js/bootstrap.js"></script>
+
+<!-- Slimscroll -->
+<script src="../../static/adminResources/js/jquery.slimscroll.js"></script>
+
+<!-- FastClick -->
+<script src="../../static/adminResources/js/fastclick.js"></script>
+
+<!-- Sparkline -->
+<script src="../../static/adminResources/js/jquery.sparkline.min.js"></script>
+
+<!-- Morris.js charts -->
+<script src="../../static/adminResources/js/raphael.min.js"></script>
+<script src="../../static/adminResources/js/morris.min.js"></script>
+
+<!-- ChartJS -->
+<script src="../../static/adminResources/js/Chart.bundle.js"></script>
+
+<!-- FLOT CHARTS -->
+<script src="../../static/adminResources/js/jquery.flot.js"></script>
+
+<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+<script src="../../static/adminResources/js/jquery.flot.resize.js"></script>
+
+<!-- weather for demo purposes -->
+<script src="../../static/adminResources/js/WeatherIcon.js"></script>
+
+<!-- SoftMaterial admin App -->
+<script src="../../static/adminResources/js/template.js"></script>
+
+<!-- SoftMaterial admin dashboard demo (This is only for demo purposes) -->
+<script src="../../static/adminResources/js/dashboard.js"></script>
+
+<!-- SoftMaterial admin for demo purposes -->
+<script src="../../static/adminResources/js/demo.js"></script>
+
+<script src="../../static/adminResources/js/statistic.js"></script>
+
+
+</body>
+</html>
