@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 
 download static files from given link (size 254 Mb):
-https://drive.google.com/drive/folders/1QefeD8H8nThLfKYY3V48RaqGCa3Aoxad?usp=sharing  .
+https://drive.google.com/drive/folders/1RyAcaFOsFKUJIX34YxoA2H8eB-SvNLaa?usp=sharing  .
 without this static file project wont work completely
 
 
